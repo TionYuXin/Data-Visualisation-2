@@ -9,6 +9,9 @@
             "filter": "datum.rank <= 1000"
         },
         {
+            "filter": "datum.created_year !== 'NA'" 
+        },
+        {
             "aggregate": [
                 {"op": "count", "as": "number_of_channels"}
             ],

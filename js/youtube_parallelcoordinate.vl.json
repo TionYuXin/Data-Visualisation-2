@@ -1,147 +1,154 @@
 {
-    "$schema": "https://vega.github.io/schema/vega/v5.json",
-    "description": "Enhanced Parallel Coordinates Plot for YouTube Channel Metrics with Tooltip",
-    "width": 800,
-    "height": 400,
-    "padding": 5,
-    "config": {
-      "axisY": {
-        "titleX": -2,
-        "titleY": 410,
-        "titleAngle": 0,
-        "titleAlign": "right",
-        "titleBaseline": "top"
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "description": "Enhanced Parallel Coordinates Plot for YouTube Channel Metrics with Tooltip",
+  "width": 800,
+  "height": 400,
+  "padding": 5,
+  "title": {
+    "text": "YouTube Channel Metrics: Subscribers, Earnings, and Views",
+    "fontSize": 20,
+    "anchor": "middle",
+    "dy": -10
+  },
+  "config": {
+    "axisY": {
+      "titleX": -2,
+      "titleY": 410,
+      "titleAngle": 0,
+      "titleAlign": "right",
+      "titleBaseline": "top"
+    }
+  },
+  "signals": [
+    {
+      "name": "subscribersThreshold",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 100000000,  
+        "name": "Minimum Subscribers: "
       }
-      
-    },
-    "signals": [
-      {
-        "name": "tooltip",
-        "value": {},
-        "on": [
-          {"events": "mark:mouseover", "update": "datum"},
-          {"events": "mark:mouseout", "update": "{}"}
-        ]
-      }
-    ],
-    "data": [
-      {
-        "name": "source",
-        "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv",
-        "format": {
-          "type": "csv"
+    }
+  ],
+  "data": [
+    {
+      "name": "source",
+      "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv",
+      "format": {
+        "type": "csv"
+      },
+      "transform": [
+        {
+          "type": "collect",
+          "sort": {"field": "subscribers", "order": "descending"}
         },
-        "transform": [
-          {
-            "type": "collect",
-            "sort": {"field": "subscribers", "order": "descending"}
-          },
-          {
-            "type": "window",
-            "ops": ["row_number"],
-            "as": ["rank"]
-          },
-          {
-            "type": "filter",
-            "expr": "datum.rank <= 100"
-          }
-        ]
-      },
-      {
-        "name": "fields",
-        "values": [
-          "subscribers",
-          "video_views_for_the_last_30_days",
-          "highest_monthly_earnings"
-        ]
-      }
-    ],
-    "scales": [
-      {
-        "name": "ord",
-        "type": "point",
-        "range": "width",
-        "round": true,
-        "domain": {"data": "fields", "field": "data"}
-      },
-      {
-        "name": "subscribers",
-        "type": "linear",
-        "range": "height",
-        "zero": false,
-        "nice": true,
-        "domain": {"data": "source", "field": "subscribers"}
-      },
-      {
-        "name": "video_views_for_the_last_30_days",
-        "type": "linear",
-        "range": "height",
-        "zero": false,
-        "nice": true,
-        "domain": {"data": "source", "field": "video_views_for_the_last_30_days"}
-      },
-      {
-        "name": "highest_monthly_earnings",
-        "type": "linear",
-        "range": "height",
-        "zero": false,
-        "nice": true,
-        "domain": {"data": "source", "field": "highest_monthly_earnings"}
-      }
-    ],
-    "axes": [
-      {
-        "orient": "left",
-        "zindex": 1,
-        "scale": "subscribers",
-        "title": "Subscribers",
-        "offset": {"scale": "ord", "value": "subscribers", "mult": -1}
-      },
-      {
-        "orient": "left",
-        "zindex": 1,
-        "scale": "video_views_for_the_last_30_days",
-        "title": "Video Views (Last 30 Days)",
-        "offset": {"scale": "ord", "value": "video_views_for_the_last_30_days", "mult": -1}
-      },
-      {
-        "orient": "left",
-        "zindex": 1,
-        "scale": "highest_monthly_earnings",
-        "title": "Highest Monthly Earnings",
-        "offset": {"scale": "ord", "value": "highest_monthly_earnings", "mult": -1}
-      }
-    ],
-    "marks": [
-      {
-        "type": "group",
-        "from": {"data": "source"},
-        "marks": [
-          {
-            "type": "line",
-            "from": {"data": "fields"},
-            "encode": {
-              "enter": {
-                "x": {"scale": "ord", "field": "data"},
-                "y": {
-                  "scale": {"datum": "data"},
-                  "field": {"parent": {"datum": "data"}}
-                },
-                "stroke": {"value": "steelblue"},
-                "strokeWidth": {"value": 1.5},
-                "strokeOpacity": {"value": 0.3}
+        {
+          "type": "window",
+          "ops": ["row_number"],
+          "as": ["rank"]
+        },
+        {
+          "type": "filter",
+          "expr": "datum.rank <= 100 && datum.subscribers >= subscribersThreshold"
+        }
+      ]
+    },
+    {
+      "name": "fields",
+      "values": [
+        "subscribers",
+        "average_monthly_earnings",
+        "video_views_for_the_last_30_days"
+      ]
+    }
+  ],
+  "scales": [
+    {
+      "name": "ord",
+      "type": "point",
+      "range": "width",
+      "round": true,
+      "domain": {"data": "fields", "field": "data"}
+    },
+    {
+      "name": "subscribers",
+      "type": "linear",
+      "range": "height",
+      "zero": false,
+      "nice": true,
+      "domain": {"data": "source", "field": "subscribers"}
+    },
+    {
+      "name": "average_monthly_earnings",
+      "type": "linear",
+      "range": "height",
+      "zero": false,
+      "nice": true,
+      "domain": {"data": "source", "field": "average_monthly_earnings"}
+    },
+    {
+      "name": "video_views_for_the_last_30_days",
+      "type": "linear",
+      "range": "height",
+      "zero": false,
+      "nice": true,
+      "domain": {"data": "source", "field": "video_views_for_the_last_30_days"}
+    }
+  ],
+  "axes": [
+    {
+      "orient": "left",
+      "zindex": 1,
+      "scale": "subscribers",
+      "title": "Subscribers",
+      "offset": {"scale": "ord", "value": "subscribers", "mult": -1}
+    },
+    {
+      "orient": "left",
+      "zindex": 1,
+      "scale": "average_monthly_earnings",
+      "title": "Average Monthly Earnings",
+      "offset": {"scale": "ord", "value": "average_monthly_earnings", "mult": -1}
+    },
+    {
+      "orient": "left",
+      "zindex": 1,
+      "scale": "video_views_for_the_last_30_days",
+      "title": "Video Views (Last 30 Days)",
+      "offset": {"scale": "ord", "value": "video_views_for_the_last_30_days", "mult": -1}
+    }
+  ],
+  "marks": [
+    {
+      "type": "group",
+      "from": {"data": "source"},
+      "marks": [
+        {
+          "type": "line",
+          "from": {"data": "fields"},
+          "encode": {
+            "enter": {
+              "x": {"scale": "ord", "field": "data"},
+              "y": {
+                "scale": {"datum": "data"},
+                "field": {"parent": {"datum": "data"}}
               },
-              "update": {
-                "strokeOpacity": {"value": 0.3}
-              },
-              "hover": {
-                "strokeOpacity": {"value": 1},
-                "strokeWidth": {"value": 2},
-                "tooltip": {"signal": "{'Subscribers': parent.subscribers, 'Video Views': parent.video_views_for_the_last_30_days, 'Earnings': parent.highest_monthly_earnings}"}
-              }
+              "stroke": {"value": "steelblue"},
+              "strokeWidth": {"value": 1.5},
+              "strokeOpacity": {"value": 0.3}
+            },
+            "hover": {
+              "strokeOpacity": {"value": 1},
+              "strokeWidth": {"value": 2},
+              "tooltip": {"signal": "{'Subscribers': parent.subscribers, 'Video Views': parent.video_views_for_the_last_30_days, 'Earnings': parent.average_monthly_earnings}"}
+            },
+            "update": {
+              "strokeOpacity": {"value": 0.3}
             }
           }
-        ]
-      }
-    ]
-  }
+        }
+      ]
+    }
+  ]
+}

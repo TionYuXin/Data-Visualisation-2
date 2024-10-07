@@ -1,0 +1,68 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "description": "Bar chart displaying the top 20 YouTube channels by subscribers",
+  "width": 600,
+  "height": 400,
+  "data": {
+    "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv",
+    "format": {
+      "type": "csv"
+    }
+  },
+  "transform": [
+    {
+      "calculate": "toNumber(datum.subscribers)",
+      "as": "subscribers_num"
+    },
+    {
+      "window": [
+        {"op": "rank", "as": "rank"}
+      ],
+      "sort": [
+        {"field": "subscribers_num", "order": "descending"}
+      ]
+    },
+    {
+      "filter": "datum.rank <= 20"
+    }
+  ],
+  "params": [
+    {
+      "name": "select",
+      "select": {
+        "type": "point",
+        "fields": ["Youtuber"],
+        "on": "click",
+        "clear": "dblclick"
+      }
+    }
+  ],
+  "mark": "bar",
+  "encoding": {
+    "x": {
+      "field": "subscribers_num",
+      "type": "quantitative",
+      "title": "Subscribers",
+      "axis": {
+        "format": "~s"
+      }
+    },
+    "y": {
+      "field": "Youtuber",
+      "type": "nominal",
+      "sort": "-x",
+      "title": "Channel"
+    },
+    "tooltip": [
+      {"field": "Youtuber", "type": "nominal"},
+      {"field": "subscribers_num", "type": "quantitative", "format": "~s"}
+    ],
+    "color": {
+            "condition": {"param": "select", "value": "steelblue"},
+            "value": "grey"
+        }
+
+
+  },
+  "title": "Top 20 YouTube Channels by Subscribers"
+}
