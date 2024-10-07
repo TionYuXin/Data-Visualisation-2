@@ -1,0 +1,45 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": { "text": "Number of Channels Published Each Year" },
+    "data": {
+        "url": "https://raw.githubusercontent.com/TionYuXin/FIT3179-HOMEWORK-WEEK-9-/main/Global_YouTube_Statistics.csv"
+    },
+    "transform": [
+        {
+            "filter": "datum.rank <= 1000"
+        },
+        {
+            "aggregate": [
+                {"op": "count", "as": "number_of_channels"}
+            ],
+            "groupby": ["created_year"]
+        }
+    ],
+    "params": [
+        {
+            "name": "brush",
+            "select": {
+                "type": "interval",
+                "encodings": ["x"]
+            }
+        }
+    ],
+    
+    "mark": "line",
+    "encoding": {
+        "x": {
+            "field": "created_year", 
+            "type": "ordinal",
+            "title": "Year"
+        },
+        "y": {
+            "field": "number_of_channels",
+            "type": "quantitative",
+            "title": "Number of Channels"
+        },
+        "tooltip": [
+            {"field": "created_year", "type": "ordinal", "title": "Year"},
+            {"field": "number_of_channels", "type": "quantitative", "title": "Number of Channels", "format": ",d"}
+        ]
+    }
+}

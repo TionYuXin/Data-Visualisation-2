@@ -1,0 +1,55 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": { "text": "Total Uploads by Channel Category" },
+    "data": {
+        "url": "https://raw.githubusercontent.com/TionYuXin/FIT3179-HOMEWORK-WEEK-9-/main/Global_YouTube_Statistics.csv"
+    },
+    "transform": [
+        {
+            "filter": "datum.rank <= 1000"
+        },
+        {
+            "filter": "datum.uploads != null && datum.channel_type != null"
+        },
+        {
+            "aggregate": [{"op": "sum", "field": "uploads", "as": "total_uploads"}],
+            "groupby": ["category"]
+        }
+    ],
+    "params": [
+        {
+            "name": "select",
+            "select": {
+                "type": "point",
+                "fields": ["category"],
+                "on": "click",
+                "clear": "dblclick"
+            }
+        }
+    ],
+    "mark": "bar",
+    "encoding": {
+        "x": {
+            "field": "category",
+            "type": "nominal",
+            "title": "Channel Category",
+            "axis": {
+                "labelAngle": -45
+            }
+        },
+        "y": {
+            "field": "total_uploads",
+            "type": "quantitative",
+            "title": "Total Uploads"
+        },
+        "tooltip": [
+            {"field": "category", "type": "nominal", "title": "Channel Category"},
+            {"field": "total_uploads", "type": "quantitative", "title": "Total Uploads"}
+        ],
+        "color": {
+            "condition": {"param": "select", "value": "steelblue"},
+            "value": "grey"
+        }
+    }
+}
+
