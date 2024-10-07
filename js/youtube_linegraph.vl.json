@@ -2,7 +2,7 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "title": { "text": "Number of Channels Published Each Year" },
     "data": {
-        "url": "https://raw.githubusercontent.com/TionYuXin/FIT3179-HOMEWORK-WEEK-9-/main/Global_YouTube_Statistics.csv"
+        "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv"
     },
     "transform": [
         {

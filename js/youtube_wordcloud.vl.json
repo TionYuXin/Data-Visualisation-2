@@ -7,7 +7,7 @@
   "data": [
       {
           "name": "table",
-          "url": "https://raw.githubusercontent.com/TionYuXin/FIT3179-HOMEWORK-WEEK-9-/main/Global_YouTube_Statistics.csv",
+          "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv",
           "format": {"type": "csv"},
           "transform": [
               {

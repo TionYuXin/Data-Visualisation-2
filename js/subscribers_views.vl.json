@@ -23,7 +23,7 @@
     },
     {
       "data": {
-        "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/raw/refs/heads/main/data/YouTube_Statistics.csv"
+        "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/raw/refs/heads/main/YouTube_Statistics.csv"
       },
       "transform": [
         {
