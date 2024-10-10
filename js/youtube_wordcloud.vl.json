@@ -1,91 +1,92 @@
 {
-  "$schema": "https://vega.github.io/schema/vega/v5.json",
-  "description": "A word cloud visualization of YouTube channel categories, excluding NaN values and empty strings.",
-  "width": 400,
-  "height": 400,
-  "padding": 0,
-  "data": [
+    "$schema": "https://vega.github.io/schema/vega/v5.json",
+    "description": "A word cloud visualization of YouTube channel categories, excluding NaN values and empty strings.",
+    "autosize": {"type": "none", "contains": "padding"}, 
+    "width": 1050,
+    "height": 450,
+    "background": "white", 
+    "data": [
       {
-          "name": "table",
-          "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv",
-          "format": {"type": "csv"},
-          "transform": [
-              {
-                  "type": "filter",
-                  "expr": "datum.category != null && datum.category !== 'nan' && datum.category !== ''"
-              },
-              {
-                "type": "filter",
-                "expr": "datum.rank <= 1000"
-            },
-              {
-                  "type": "aggregate",
-                  "groupby": ["category"],
-                  "ops": ["count"],
-                  "as": ["count"]
-              },
-              {
-                  "type": "window",
-                  "ops": ["rank"],
-                  "as": ["rank"],
-                  "sort": {"field": "count", "order": "descending"}
-              },
-              
-              {
-                  "type": "formula",
-                  "as": "angle",
-                  "expr": "[-45, 0, 45][~~(random() * 3)]"
-              },
-              {
-                  "type": "formula",
-                  "as": "weight",
-                  "expr": "if(datum.category=='Entertainment', 600, 300)"
-              }
-          ]
-      }
-  ],
-  "scales": [
-      {
-          "name": "color",
-          "type": "ordinal",
-          "domain": {"data": "table", "field": "category"},
-          "range": ["#d5a928", "#652c90", "#939597"]
-      }
-  ],
-  "marks": [
-      {
-          "type": "text",
-          "from": {"data": "table"},
-          "encode": {
-              "enter": {
-                  "text": {"field": "category"},
-                  "align": {"value": "center"},
-                  "baseline": {"value": "alphabetic"},
-                  "fill": {"scale": "color", "field": "category"}
-              },
-              "update": {
-                  "fillOpacity": {"value": 1},
-                  "tooltip": {
-                      "signal": "{'Category': datum.category, 'Count': datum.count}"
-                  }
-              },
-              "hover": {
-                  "fillOpacity": {"value": 0.5}
-              }
+        "name": "table",
+        "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv",
+        "format": {"type": "csv"},
+        "transform": [
+          {
+            "type": "filter",
+            "expr": "datum.category != null && datum.category !== 'nan' && datum.category !== ''"
           },
-          "transform": [
-              {
-                  "type": "wordcloud",
-                  "size": [700, 300],
-                  "text": {"field": "category"},
-                  "rotate": {"field": "datum.angle"},
-                  "font": "Helvetica Neue, Arial",
-                  "fontSize": {"field": "datum.count"},
-                  "fontWeight": {"field": "datum.weight"},
-                  "fontSizeRange": [24, 60],
-                  "padding": 2
-              }
-          ]
+          {
+            "type": "filter",
+            "expr": "datum.rank <= 1000"
+          },
+          {
+            "type": "aggregate",
+            "groupby": ["category"],
+            "ops": ["count"],
+            "as": ["count"]
+          },
+          {
+            "type": "window",
+            "ops": ["rank"],
+            "as": ["rank"],
+            "sort": {"field": "count", "order": "descending"}
+          },
+          {
+            "type": "formula",
+            "as": "angle",
+            "expr": "[-45, 0, 45][~~(random() * 3)]"
+          },
+          {
+            "type": "formula",
+            "as": "weight",
+            "expr": "if(datum.category=='Entertainment', 600, 300)"
+          }
+        ]
       }
-  ]
-}
+    ],
+    "scales": [
+      {
+        "name": "color",
+        "type": "ordinal",
+        "domain": {"data": "table", "field": "category"},
+        "range": ["#8B0000", "#00008B", "#FF8C00"]
+      }
+    ],
+    "marks": [
+      {
+        "type": "text",
+        "from": {"data": "table"},
+        "encode": {
+          "enter": {
+            "text": {"field": "category"},
+            "align": {"value": "center"},
+            "baseline": {"value": "alphabetic"},
+            "fill": {"scale": "color", "field": "category"}
+          },
+          "update": {
+            "fillOpacity": {"value": 1},
+            "tooltip": {
+              "signal": "{'Category': datum.category, 'Count': datum.count}"
+            }
+          },
+          "hover": {
+            "fillOpacity": {"value": 0.5}
+          }
+        },
+        "transform": [
+          {
+            "type": "wordcloud",
+            "size": [1050, 440],
+            "text": {"field": "category"},
+            "rotate": {"field": "datum.angle"},
+            "font": "Helvetica Neue, Arial",
+            "fontSize": {"field": "datum.count"},
+            "fontWeight": {"field": "datum.weight"},
+            "fontSizeRange": [30, 90],
+            "padding": 5
+          }
+        ]
+      }
+    ]
+  }
+  

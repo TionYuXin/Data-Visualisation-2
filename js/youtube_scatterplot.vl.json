@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 500,
-  "height": 500,
+  "width": 980,
+  "height": 390,
   "title": { "text": "Top 100 youtuber Subscriber Growth vs. Video Views (Last 30 Days)" },
   "params": [
       {
@@ -54,6 +54,7 @@
               "tickCount": 5
           }
       },
+      
       "y": {
           "field": "video_views_for_the_last_30_days",
           "type": "quantitative",
@@ -64,11 +65,15 @@
               "tickCount": 5
           }
       },
+      
       "tooltip": [
           {"field": "Youtuber", "type": "nominal", "title": "Youtuber"},
           {"field": "subscribers_for_last_30_days", "type": "quantitative", "title": "Subscriber Growth (Last 30 Days) [Thousands]", "format": ",.1f"},
           {"field": "video_views_for_the_last_30_days", "type": "quantitative", "title": "Video Views (Last 30 Days) [Millions]", "format": ",.1f"}
       ]
+
+      
+      
   }
 }
 

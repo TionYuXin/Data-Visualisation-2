@@ -5,22 +5,150 @@
   <script src="https://cdn.jsdelivr.net/npm/vega@5.30.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.20.1"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.26.0"></script>
-  
+  <link href="https://fonts.googleapis.com/css2?family=Fondamento&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/pure-min.css" integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/purecss@3.0.0/build/grids-responsive-min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <!-- Link to your CSS -->
-  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+  <link rel="stylesheet" href="css/style_sheet.css">
 </head>
 <body>
   
+  <h1 id="c-align">
+    <i class="fa-brands fa-youtube" style="color: #ff0000;"></i> Unveiling the Titans of YouTube
+  </h1>
+  <div class="text">
+    <p id="c-align">An exploration of global engagement on YouTube, providing analyses on influential creators, 
+      content strategies, regional impacts, earnings correlations, and geographical trends in popularity.</p>
+
+  </div>
+          
+
+
+
+
+<!-- The div where your point map will be embedded -->
+</head>
+<body>
+  <div class="pure-g">
+    <div class="text">
+      <p id="l-align">The Visualization below showcasing the Top 20 YouTube Channels by Subscribers presents a diverse array 
+        of content categories, prominently led by entertainment, music, and children's programming. At the forefront is T-Series, 
+        celebrated for its Bollywood music and films, boasting over 200 million subscribers and holding the top spot. It is 
+        closely followed by YouTube Movies and MrBeast, who is famed for his complex challenges and philanthropic efforts. 
+        The chart also highlights channels like Cocomelon, which delivers nursery rhymes, and global music phenomena such as 
+        BLACKPINK. This mix extends to gaming, sports, and additional entertainment channels, reflecting the broad range of 
+        interests catered to by YouTube's vast global audience.</p>
+    </div>
+    <div class="pure-u-1-1">
+      <div id="Barhorizontal">
+        <!-- Placeholder for the scatter plot -->
+      </div>
+    </div>
+  </div>
   
-  <!-- The div where your point map will be embedded -->
-  <h1>Week 10 Homework</h1>
-  <h2>Scatter Plot: Subscriber Growth vs. Video Views (Last 30 Days)</h2>
-  <div id="Scatter"></div>
-  <h2>Map Visualization: Total View and Total Subscribers by countries</h2>
-  <div id="symbol_map"></div>
+
+  <!-- New Layer for the line graph -->
+  <div class="pure-g">
+    <div class="text">
+      <p id="l-align">Move on to the graph that shows yearly creation of the Top 1000 global youtube channel. The line 
+        graph illustrates significant spikes in channel creation in 2006 and 2014, indicating that these top global YouTubers 
+        capitalized on the growing trend of using YouTube as a major platform for content dissemination. This surge can be 
+        linked to YouTube's increasing popularity. However, the graph also shows a sharp decline in new channels post-2015. 
+        This downward trend could be attributed to market saturation and the emergence of competing platforms like TikTok, 
+        which introduced new opportunities for content creation and consumption, diverting potential new creators away from 
+        YouTube.</p>
+    </div>
+    <div class="pure-u-1-1">
+      <div id="linegraph">
+      </div>
+    </div>
+  </div>
+
+  <!-- New Layer for the word cloud -->
+  <div class="pure-g">
+    <div class="text">
+      <p id="l-align">The word cloud highlights trending YouTube content categories such as "Entertainment," "Music," and 
+        "Gaming," indicating their widespread popularity and demonstrating that these categories are particularly hot, as 
+        they are most prevalent among the top YouTube channels. Mapping these popular categories against major global events 
+        can reveal dynamic shifts in viewer preferences in response to external occurrences.
+      </p>
+    </div>
+    <div class="pure-u-1-1">
+      <div id='wordcloud'>
+      </div>
+    </div>
+    
+
+  <!-- New Layer for the bar chart-->
+  <div class="pure-g">
+    <div class="text">
+      <p id="l-align"> The bar chart titled "Total Uploads by Channel Category" categorizes the top YouTube channels by their 
+        content type, providing insights into the correlation between upload frequency and subscriber growth. Categories such as
+         "Entertainment" and "Music" lead with the highest volume of uploads, indicating their robust popularity and the 
+         extensive content production associated with these genres. Such frequent uploading in these dominant categories is 
+         likely a key strategy for maintaining viewer engagement and driving subscriber increases. Meanwhile, "Gaming" also 
+         shows substantial activity, suggesting that its regular content output significantly contributes to its strong presence 
+         in the digital content space. In contrast, categories like "Education," "Film & Animation," and "News & Politics," which
+          feature moderate upload volumes, may experience different dynamics in how upload frequency affects their audience growth. 
+          This analysis helps in understanding that consistent and frequent uploads are critical in attracting and retaining 
+          subscribers, particularly in the most popular genres.
+      </p>
+    </div>
+    <div class="pure-u-1-1">
+      <div id='barchart'>
+    </div>
+  </div>
+
+  <!-- New Layer for the  scatter plot-->
+  <div class="pure-g">
+    <div class="text">
+      <p id="l-align"> 
+        The scatterplot titled "Unveiling the Titans of YouTube" illustrates a trend where higher video views do not consistently 
+        translate into greater subscriber gains among the top 100 YouTube channels. Most channels exhibit modest increases in 
+        both metrics, with the data points primarily clustering in the lower spectrum of views and subscriber growth. Notably,
+         Mr-Beast stands out as an exception, achieving both high views and significant subscriber growth, underscoring its 
+         unique appeal and content reach that resonate on a large scale. This pattern suggests that while high viewership is 
+         advantageous, it does not guarantee a proportional rise in subscriber numbers for most channels.
+      </p>
+    </div>
+    <div class="pure-u-1-1">
+      <div id='Scatter'>
+      </div>
+    </div>
+
+    <!-- New Layer for the map -->
+  <div class="pure-g">
+    <div class="text">
+      <p id="l-align"> 
+        The map visualizing "YouTube Total Views and Subscribers by Country" highlights the significant online influence of 
+        content creators based in the USA and India, as they lead with the highest concentrations of YouTube views and 
+        subscribers. This influence is denoted by the larger and more intensely colored circles in these regions. The USA, 
+        often a hub for a wide array of content including entertainment and educational material, showcases extensive subscriber 
+        numbers, underpinned by its cultural export capabilities and widespread English language use. Meanwhile, India, with its 
+        burgeoning digital population and strong local content in both Hindi and English, reflects substantial engagement both 
+        in viewership and subscriber counts, likely bolstered by the widespread popularity of Bollywood-related content, as
+         exemplified by channels like T-Series. This distribution suggests that these two countries hold dominant positions 
+         in the global digital landscape, driving significant portions of YouTube's traffic and audience engagement.
+      </p>
+    </div>
+    <div class="pure-u-1-1">
+      <div id='symbol_map'>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+  
+
 
   <script type="text/javascript">
-
     var spec3 = "js/youtube_scatterplot.vl.json";
     vegaEmbed('#Scatter', spec3).then(function(result) {
       // Access the Vega view instance as result.view
@@ -28,6 +156,31 @@
 
     var spec2 = "js/subscribers_views.vl.json";  // Link to your JSON spec for the map
     vegaEmbed('#symbol_map', spec2).then(function(result) {
+      // Access the Vega view instance as result.view
+    }).catch(console.error);
+
+    var spec4 = "js/toutube_top20globalyoutuber.vl.json";  // Link to your JSON spec for the map
+    vegaEmbed('#Barhorizontal', spec4).then(function(result) {
+      // Access the Vega view instance as result.view
+    }).catch(console.error);
+
+    var spec5 = "js/youtube_wordcloud.vl.json";  // Link to your JSON spec for the map
+    vegaEmbed('#wordcloud', spec5).then(function(result) {
+      // Access the Vega view instance as result.view
+    }).catch(console.error);
+
+    var spec6 = "js/youtube_linegraph.vl.json";  // Link to your JSON spec for the map
+    vegaEmbed('#linegraph', spec6).then(function(result) {
+      // Access the Vega view instance as result.view
+    }).catch(console.error);
+
+    var spec7 = "js/youtube_barchart.vl.json";  // Link to your JSON spec for the map
+    vegaEmbed('#barchart', spec7).then(function(result) {
+      // Access the Vega view instance as result.view
+    }).catch(console.error);
+
+    var spec8 = "js/youtube_parallelcoordinate.vl.json";  // Link to your JSON spec for the map
+    vegaEmbed('#parallelcoordinate', spec8).then(function(result) {
       // Access the Vega view instance as result.view
     }).catch(console.error);
   </script>

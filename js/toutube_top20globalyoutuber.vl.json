@@ -1,7 +1,7 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "description": "Bar chart displaying the top 20 YouTube channels by subscribers",
-  "width": 600,
+  "description": "Bar chart displaying YouTube channels by subscribers with an interactive threshold slider",
+  "width": 880,
   "height": 400,
   "data": {
     "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv",
@@ -13,6 +13,9 @@
     {
       "calculate": "toNumber(datum.subscribers)",
       "as": "subscribers_num"
+    },
+    {
+      "filter": "datum.subscribers_num >= threshold"
     },
     {
       "window": [
@@ -28,41 +31,62 @@
   ],
   "params": [
     {
-      "name": "select",
-      "select": {
-        "type": "point",
-        "fields": ["Youtuber"],
-        "on": "click",
-        "clear": "dblclick"
+      "name": "threshold",
+      "value": 0,
+      "bind": {
+        "input": "range",
+        "min": 0,
+        "max": 220000000,
+        "step": 1000000,
+        "name": "Subscriber Threshold: "
       }
     }
   ],
-  "mark": "bar",
-  "encoding": {
-    "x": {
-      "field": "subscribers_num",
-      "type": "quantitative",
-      "title": "Subscribers",
-      "axis": {
-        "format": "~s"
+  "layer": [
+    {
+      "mark": "bar",
+      "encoding": {
+        "x": {
+          "field": "subscribers_num",
+          "type": "quantitative",
+          "title": "Subscribers",
+          "axis": {
+            "format": "~s"
+          }, "scale": {"domain": [0,300000000]}
+        },
+        "y": {
+          "field": "Youtuber",
+          "type": "nominal",
+          "sort": "-x",
+          "title": "Channel"
+        },
+        "tooltip": [
+          {"field": "Youtuber", "type": "nominal"},
+          {"field": "subscribers_num", "type": "quantitative", "format": "~s"}
+        ]
       }
     },
-    "y": {
-      "field": "Youtuber",
-      "type": "nominal",
-      "sort": "-x",
-      "title": "Channel"
-    },
-    "tooltip": [
-      {"field": "Youtuber", "type": "nominal"},
-      {"field": "subscribers_num", "type": "quantitative", "format": "~s"}
-    ],
-    "color": {
-            "condition": {"param": "select", "value": "steelblue"},
-            "value": "grey"
-        }
-
-
-  },
-  "title": "Top 20 YouTube Channels by Subscribers"
+    {
+      "transform": [{"filter": "datum.rank == 1"}],
+      "mark": {
+        "type": "text",
+        "align": "left",
+        "dx": 5, 
+        "dy": -30, 
+        "fontSize": 11
+      },
+      "encoding": {
+  "x": {"field": "subscribers_num", "type": "quantitative"},
+  "y": {"field": "Youtuber", "type": "nominal"},
+  "text": {
+  "value": [
+    "Famous for its Bollywood content,",
+    "over 200 million subscribers"
+  ]
+},
+  "color": {"value": "black"}
+}
+    }
+  ],
+  "title": "Top YouTube Channels by Subscribers"
 }

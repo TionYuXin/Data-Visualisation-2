@@ -1,5 +1,7 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "width": 970,
+    "height": 330,
     "title": { "text": "Total Uploads by Channel Category" },
     "data": {
         "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv"
@@ -9,7 +11,7 @@
             "filter": "datum.rank <= 1000"
         },
         {
-            "filter": "datum.uploads != null && datum.channel_type != null"
+            "filter": "datum.uploads != null && datum.channel_type != null && datum.category !== 'nan'"
         },
         {
             "aggregate": [{"op": "sum", "field": "uploads", "as": "total_uploads"}],
@@ -52,4 +54,3 @@
         }
     }
 }
-

@@ -1,26 +1,13 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 800,
-  "height": 450,
+  "width": 880,
+  "height": 400,
   "title": "YouTube Total Views and Subscribers by Country (First 100 Rows Aggregated)",
+  
   "projection": {
     "type": "equalEarth"
   },
   "layer": [
-    {
-      "data": {
-        "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/js/ne_110m_with%20ocean.json",
-        "format": {
-          "type": "topojson",
-          "feature": "oceans"
-        }
-      },
-      "mark": {
-        "type": "geoshape",
-        "fill": "skyblue",
-        "stroke": "none"
-      }
-    },
     {
       "data": {
         "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/js/ne_110m_with%20ocean.json",
@@ -37,6 +24,13 @@
     },
     {
       "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
+        "format": {"type": "topojson", "feature": "oceans"}
+      }, 
+      "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
+    {
+      "data": {
         "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv"
       },
       "transform": [
@@ -49,6 +43,9 @@
           "filter": "datum.rank <= 100"
         },
         {
+          "filter": "datum['Country'] !== 'nan' && datum['subscribers'] !== 'nan'"
+        },
+        {
           "aggregate": [
             {"op": "sum", "field": "video views", "as": "total_video_views"},
             {"op": "sum", "field": "subscribers", "as": "total_subscribers"},
@@ -59,7 +56,8 @@
         }
       ],
       "mark": {
-        "type": "circle"
+        "type": "circle",
+        "opacity": 0.9
       },
       "encoding": {
         "longitude": {
@@ -73,29 +71,27 @@
         "size": {
           "field": "total_video_views",
           "type": "quantitative",
-          "title": "Total Views",
+          "title": "Total Views(Billions)",
           "scale": {
             "type": "threshold",
             "domain": [10000000000, 50000000000, 100000000000],
-            "range": [300, 500, 1000, 2000]
+            "range": [200, 500, 1000, 1500]
           },
           "legend": {
-            "format": ".1s",
-            "title": "Total Views (Billions)"
+            "format": ".1s"
           }
         },
         "color": {
           "field": "total_subscribers",
           "type": "quantitative",
-          "title": "Total Subscribers",
+          "title": "Total Subscribers(Billions)",
           "scale": {
             "type": "threshold",
-            "domain": [50000000, 100000000, 300000000, 1000000000, 2000000000],
+            "domain": [50000000, 200000000, 300000000, 1000000000],
             "range": ["#ffeda0", "#feb24c", "#fc4e2a", "#e31a1c", "#b10026"]
           },
           "legend": {
-            "format": ".1s",
-            "title": "Total Subscribers (Billions)"
+            "format": ".1s"
           }
         },
         "tooltip": [

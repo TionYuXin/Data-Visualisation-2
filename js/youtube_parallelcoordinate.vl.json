@@ -1,7 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega/v5.json",
   "description": "Enhanced Parallel Coordinates Plot for YouTube Channel Metrics with Tooltip",
-  "width": 800,
+  "background": "#f9f9f9",
+  "width": 970,
   "height": 400,
   "padding": 5,
   "title": {

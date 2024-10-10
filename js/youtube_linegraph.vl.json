@@ -1,48 +1,82 @@
 {
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-    "title": { "text": "Number of Channels Published Each Year" },
+    "width": 1000,
+    "height": 380,
+    "title": { "text": "Yearly Creation Trends of the Top 1000 Global YouTube Channels" },
     "data": {
-        "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv"
+      "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv"
     },
     "transform": [
-        {
-            "filter": "datum.rank <= 1000"
-        },
-        {
-            "filter": "datum.created_year !== 'NA'" 
-        },
-        {
-            "aggregate": [
-                {"op": "count", "as": "number_of_channels"}
-            ],
-            "groupby": ["created_year"]
-        }
+      {
+        "filter": "datum.rank <= 1000"
+      },
+      {
+        "filter": "datum.created_year !== 'NA'"
+      },
+      {
+        "aggregate": [
+          {"op": "count", "as": "number_of_channels"}
+        ],
+        "groupby": ["created_year"]
+      }
     ],
-    "params": [
-        {
-            "name": "brush",
-            "select": {
-                "type": "interval",
-                "encodings": ["x"]
-            }
-        }
-    ],
-    
-    "mark": "line",
-    "encoding": {
-        "x": {
+    "layer": [
+      {
+        "mark": "line",
+        "encoding": {
+          "x": {
             "field": "created_year", 
             "type": "ordinal",
             "title": "Year"
-        },
-        "y": {
+          },
+          "y": {
             "field": "number_of_channels",
             "type": "quantitative",
             "title": "Number of Channels"
-        },
-        "tooltip": [
+          },
+          "tooltip": [
             {"field": "created_year", "type": "ordinal", "title": "Year"},
             {"field": "number_of_channels", "type": "quantitative", "title": "Number of Channels", "format": ",d"}
+          ]
+        }
+      },  {
+        "mark": "rule",
+        "encoding": {
+          "x": {"field": "created_year", "type": "ordinal"},
+          "color": {"value": "red"},
+          "opacity": {"value": 0.5}
+        },
+        "data": {
+          "values": [
+            {"created_year": "2014"},
+            {"created_year": "2006"}
         ]
-    }
-}
+      }},
+       {
+        "mark": {
+          "type": "text",
+          "align": "left",
+          "baseline": "middle",
+          "dx": 5,"dy": -1,
+          "fontSize": 11,
+          "color":  "red"
+        },
+        "encoding": {
+          "x": {"field": "created_year", "type": "ordinal"},
+          "y": {"field": "y", "type": "quantitative"},
+          "text": {"field": "text", "type": "nominal"},
+          "tooltip": [
+            {"field": "text", "type": "nominal", "title": "Event Description"},
+            {"field": "Year", "type": "temporal", "title": "Year of Event"},
+            {"field": "y", "type": "quantitative", "title": "Population Change at Event"}
+          ]
+        },
+        "data": {
+          "values": [
+            {"created_year": "2014", "y": 98, "text": ""},
+            {"created_year": "2006", "y": 98, "text": ""}
+          ]
+        }
+      }
+    ]
+  }
