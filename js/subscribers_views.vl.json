@@ -1,8 +1,8 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
-  "width": 880,
+  "width": 900,
   "height": 400,
-  "title": "YouTube Total Views and Subscribers by Country (First 100 Rows Aggregated)",
+  "title": "First 1000 Youtube's Channels Total Views and Subscribers by Country",
   
   "projection": {
     "type": "equalEarth"
@@ -26,8 +26,20 @@
       "data": {
         "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/7_others/oceans.topojson",
         "format": {"type": "topojson", "feature": "oceans"}
-      }, 
+      },
       "mark": {"type": "geoshape", "fill": "skyblue"}
+    },
+    {
+      "data": {
+        "graticule": {
+          "step": [30, 30] 
+        }
+      },
+      "mark": {
+        "type": "geoshape",
+        "stroke": "lightgray", 
+        "strokeWidth": 0.5 
+      }
     },
     {
       "data": {
@@ -100,6 +112,52 @@
           {"field": "total_subscribers", "type": "quantitative", "title": "Total Subscribers", "format": ".3s"}
         ]
       }
+    },
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv"
+      },
+      "transform": [
+        {
+          "window": [
+            {"op": "row_number", "as": "rank"}
+          ]
+        },
+        {
+          "filter": "datum.rank <= 100"
+        },
+        {
+          "filter": "datum['Country'] === 'United States' || datum['Country'] === 'Brazil' || datum['Country'] === 'India' || datum['Country'] === 'Russia'" 
+        },
+        {
+          "aggregate": [
+            {"op": "mean", "field": "Latitude", "as": "avg_latitude"},
+            {"op": "mean", "field": "Longitude", "as": "avg_longitude"}
+          ],
+          "groupby": ["Country"]
+        }
+      ],
+      "mark": {
+        "type": "text",
+        "dy": -10,
+        "fontSize": 10,
+        "color": "black"
+      },
+      "encoding": {
+        "longitude": {
+          "field": "avg_longitude",
+          "type": "quantitative"
+        },
+        "latitude": {
+          "field": "avg_latitude",
+          "type": "quantitative"
+        },
+        "text": {
+          "field": "Country",
+          "type": "nominal"
+        }
+      }
     }
   ]
 }
+

@@ -32,7 +32,7 @@
           "y": {
             "field": "number_of_channels",
             "type": "quantitative",
-            "title": "Number of Channels"
+            "title": "Number of Channels Pubished"
           },
           "tooltip": [
             {"field": "created_year", "type": "ordinal", "title": "Year"},
@@ -73,8 +73,8 @@
         },
         "data": {
           "values": [
-            {"created_year": "2014", "y": 98, "text": ""},
-            {"created_year": "2006", "y": 98, "text": ""}
+            {"created_year": "2014", "y": 98, "text": "Peak of Channel Creation"},
+            {"created_year": "2006", "y": 98, "text": "Peak of Channel Creation"}
           ]
         }
       }

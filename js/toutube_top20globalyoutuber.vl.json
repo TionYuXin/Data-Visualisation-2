@@ -49,7 +49,7 @@
         "x": {
           "field": "subscribers_num",
           "type": "quantitative",
-          "title": "Subscribers",
+          "title": "Total Subscribers",
           "axis": {
             "format": "~s"
           }, "scale": {"domain": [0,300000000]}
@@ -58,7 +58,7 @@
           "field": "Youtuber",
           "type": "nominal",
           "sort": "-x",
-          "title": "Channel"
+          "title": "Youtube Channel"
         },
         "tooltip": [
           {"field": "Youtuber", "type": "nominal"},
@@ -72,7 +72,7 @@
         "type": "text",
         "align": "left",
         "dx": 5, 
-        "dy": -30, 
+        "dy": -25, 
         "fontSize": 11
       },
       "encoding": {
@@ -80,11 +80,11 @@
   "y": {"field": "Youtuber", "type": "nominal"},
   "text": {
   "value": [
-    "Famous for its Bollywood content,",
-    "over 200 million subscribers"
+    "Famous for its ",
+    "Bollywood content"
   ]
 },
-  "color": {"value": "black"}
+  "color": {"value": "red"}
 }
     }
   ],

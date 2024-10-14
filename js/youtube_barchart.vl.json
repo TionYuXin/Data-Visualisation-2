@@ -2,7 +2,7 @@
     "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
     "width": 970,
     "height": 330,
-    "title": { "text": "Total Uploads by Channel Category" },
+    "title": { "text": "Total Uploads by Channel Category of Top 1000 Youtubers" },
     "data": {
         "url": "https://raw.githubusercontent.com/TionYuXin/Data-Visualisation-2/refs/heads/main/YouTube_Statistics.csv"
     },
@@ -42,15 +42,25 @@
         "y": {
             "field": "total_uploads",
             "type": "quantitative",
-            "title": "Total Uploads"
+            "title": "Total Video Uploads"
         },
         "tooltip": [
             {"field": "category", "type": "nominal", "title": "Channel Category"},
             {"field": "total_uploads", "type": "quantitative", "title": "Total Uploads"}
         ],
         "color": {
-            "condition": {"param": "select", "value": "steelblue"},
-            "value": "grey"
+    "condition": [
+        {
+            "test": "(datum.category === 'Entertainment' || datum.category === 'News & Politics') && !select.category",
+            "value": "steelblue"
+        },
+        {
+            "param": "select",
+            "empty": false,
+            "value": "blue"
         }
+    ],
+    "value": "grey"
+}
     }
 }
