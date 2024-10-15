@@ -80,20 +80,7 @@ body, html {
 }
 
 
-.intro, .overview {
-    margin-bottom: 30px; /* Extra space after the paragraphs */
-    padding-left: 140px;  /* 50 pixels padding on the left */
-    padding-right: 140px; /* 50 pixels padding on the right */
 
-}
 
-.pure-g2 {
-    display: flex;
-    justify-content: space-between; /* Ensures space between columns */
-    justify-content: center; /* Centers content horizontally */
-    height: 100%;            /* Ensures the div takes full container height */
-    margin-bottom: 5em;
-}
-  
 
 
