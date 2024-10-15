@@ -80,7 +80,14 @@ body, html {
 }
 
 
+.overview {
+    margin-bottom: 30px; /* Extra space after the paragraphs */
+    padding-left: 140px;  /* 50 pixels padding on the left */
+    padding-right: 140px; /* 50 pixels padding on the right */
+
+}
 
 
+  
 
 
