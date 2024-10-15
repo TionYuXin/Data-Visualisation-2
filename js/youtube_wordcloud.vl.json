@@ -83,8 +83,8 @@
             "font": "Helvetica Neue, Arial",
             "fontSize": {"field": "datum.count"},
             "fontWeight": {"field": "datum.weight"},
-            "fontSizeRange": [25, 78],
-            "padding": 5
+            "fontSizeRange": [30, 78],
+            "padding": 6
           }
         ]
       }
